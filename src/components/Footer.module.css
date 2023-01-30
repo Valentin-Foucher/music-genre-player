@@ -1,0 +1,72 @@
+.footer {
+    height: 10vh;
+    width: 100%;
+    padding: 0 16px;
+
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    border-top: 1px solid rgba(60, 60, 60, 10);
+    background-color: rgb(30, 30, 30);
+}
+
+.footer > div {
+    display: flex;
+    align-items: center;
+}
+
+.footer > div:nth-child(1), .footer > div:nth-child(3) {
+    width: 30%;
+}
+
+.footer > div:nth-child(2) {
+    width: 40%;
+}
+
+.current-song {
+    max-width: 180px;
+    margin: 10px 15px;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.song-name {
+    font-size: 12px;
+}
+
+.main-artist {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.song-genre {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: capitalize;
+}
+
+.button-heart {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.button-heart svg, .button-heart svg path {
+    fill: currentColor;
+}
+
+.button-heart:hover {
+    fill: #fff;
+    color: #fff;
+}
+
+.sound-bar {
+    justify-content: center;
+}

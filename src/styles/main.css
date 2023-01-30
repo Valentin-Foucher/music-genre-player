@@ -1,0 +1,19 @@
+:root {
+    --main-color: rgb(26, 26, 26);
+}
+
+body {
+    margin: 0;
+    background-color: var(--main-color);
+    color: #fff;
+    font-family: 'Montserrat,Candara,Calibri,Segoe,Segoe UI,Optima,Arial', sans-serif;
+}
+
+a, button {
+    touch-action: manipulation;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
