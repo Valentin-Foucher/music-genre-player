@@ -1,7 +1,5 @@
-import { genreSchema } from '@/schemas/requests';
-import Ajv from 'ajv';
 import { Session } from '@/types/types';
-import { badRequest, ok, methodNotAllowed } from '@/helpers/communication';
+import { badRequest, methodNotAllowed, noReply, ok } from '@/helpers/communication';
 import { SpotifyMusicPlayer } from '@/clients/music';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
@@ -11,11 +9,9 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
   ) {
-    if (req.method !== 'POST') {
+    if (req.method !== 'GET') {
       methodNotAllowed(res);
-    }
-
-    new Ajv().validate(genreSchema, req.body);
+    } 
 
     const session = await getSession({ req });
 
@@ -23,10 +19,10 @@ export default async function handler(
 
     let result;
     try {
-      result = await player.searchTrackByGenre(req.body.genre);
+        result = await player.checkInFavorites(req.query.id as string);
     } catch (error) {
-      console.log(error)
-      return badRequest(res);
+        console.log(error)
+        return badRequest(res);
     }
     ok(res, result.data);
   }

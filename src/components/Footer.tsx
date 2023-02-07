@@ -3,6 +3,7 @@ import styles from './Footer.module.css';
 import { formatMillis } from '@/utils/time-utils';
 import Image from 'next/image';
 import ButtonHeart from '@/assets/images/button-heart.svg';
+import PressedButtonHeart from '@/assets/images/pressed-button-heart.svg';
 import UnknownArtist from '@/assets/images/unknown-artist.svg';
 import axios from 'axios';
 
@@ -12,14 +13,13 @@ export default function Footer({ currentlyPlayingData, genre, updateCurrentSong 
     const [duration, setDuration] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [previewImageUrl, setPreviewImageUrl] = useState();
-    const [favorites, setFavorites] = useState();
+    const [updatingFavorites, setUpdatingFavorites] = useState<boolean>(false);
+    const [isFavorite, setIsFavorite] = useState(false);
     
     const songData = currentlyPlayingData?.item;
     
-    const addToFavorites = () => {
-        axios
-        .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/add-to-favorites`, { trackId: songData.id })
-        .then;
+    const toggleFavorites = () => {
+        setUpdatingFavorites(true);
     }
     
     const resetPlayerToCurrentSong = () => {
@@ -34,6 +34,21 @@ export default function Footer({ currentlyPlayingData, genre, updateCurrentSong 
             window.removeEventListener('focus', resetPlayerToCurrentSong);
         };
     });
+
+    useEffect(() => {
+        if (updatingFavorites) {
+            if (!isFavorite) {
+                axios
+                .put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/favorites/${songData.id}`)
+                .then(_ => setUpdatingFavorites(false));
+            } else {
+                axios
+                .delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/favorites/${songData.id}`)
+                .then(_ => setUpdatingFavorites(false));
+            }
+            setIsFavorite(!isFavorite);
+        }
+    }, [updatingFavorites]);
     
     useEffect(() => {
         if (songData) {
@@ -41,6 +56,10 @@ export default function Footer({ currentlyPlayingData, genre, updateCurrentSong 
             if (songData?.album?.images.length > 0) {
                 setPreviewImageUrl(songData.album.images.find((i: { height: number, url: string }) => i.height === 64)?.url);
             }
+
+            axios
+            .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/favorites/${songData.id}/check`)
+            .then(res => setIsFavorite(res.data[0]));
             
             let t = currentlyPlayingData.progress_ms;
             
@@ -98,11 +117,15 @@ export default function Footer({ currentlyPlayingData, genre, updateCurrentSong 
                         <button 
                             className={styles['button-heart']}
                             role='switch'
-                            aria-checked='false'
+                            aria-checked={isFavorite}
                             aria-label='Save to Your Library'
-                            onClick={addToFavorites}
+                            onClick={toggleFavorites}
+                            disabled={updatingFavorites}
                         >
-                            <ButtonHeart />
+                            {isFavorite 
+                            ? <PressedButtonHeart /> 
+                            : <ButtonHeart />}
+                            
                         </button>
                     </div>
                     

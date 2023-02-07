@@ -52,13 +52,32 @@ class SpotifyMusicPlayer extends BaseClient {
         );
     }
 
+    // favorites 
+    async removeFromFavorites(id: string) {
+        return await this._delete(
+            '/me/tracks',
+            {
+                ids: [id]
+            }
+        );
+    }
+
     async addToFavorites(id: string) {
         return await this._put(
             '/me/tracks',
             {
                 ids: [id]
             }
-        )
+        );
+    }
+
+    async checkInFavorites(id: string) {
+        return await this._get(
+            '/me/tracks/contains',
+            {
+                ids: id
+            }
+        );
     }
 
     // play

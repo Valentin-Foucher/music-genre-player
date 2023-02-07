@@ -41,4 +41,8 @@ const unprocessableEntity = (res: Response, message?: string) => {
   makeResponse(res, 422, message);
 };
 
-export { ok, noReply, badRequest, unauthorized, forbidden, notFound, conflict, unprocessableEntity };
+const methodNotAllowed = (res: Response, message?: string) => {
+  makeResponse(res, 405, message);
+};
+
+export { ok, noReply, badRequest, unauthorized, forbidden, notFound, conflict, unprocessableEntity, methodNotAllowed };

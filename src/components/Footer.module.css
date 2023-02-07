@@ -55,14 +55,21 @@
 
 .button-heart {
     background-color: transparent;
+}
+
+.button-heart[aria-checked=false] {
     color: rgba(255, 255, 255, 0.7);
+}
+
+.button-heart[aria-checked=true] {
+    color: #1ed760;    
 }
 
 .button-heart svg, .button-heart svg path {
     fill: currentColor;
 }
 
-.button-heart:hover {
+.button-heart[aria-checked=false]:hover {
     fill: #fff;
     color: #fff;
 }

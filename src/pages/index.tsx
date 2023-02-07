@@ -88,7 +88,7 @@ export default function Home() {
     
     useEffect(() => {
         if (device && device.active === false) {
-            axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/player`, { deviceId: device.id })
+            axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/set-player`, { deviceId: device.id })
             .then(_ => setDevice({...device, active: true}));
             return;
         }

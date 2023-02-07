@@ -26,8 +26,8 @@ export default class BaseClient {
         return await this._request({ method: 'GET', path, args: { params }});
     }
 
-    async _delete(path: string): Promise<AxiosResponse<any, any>> {
-        return await this._request({ method: 'DELETE', path });
+    async _delete(path: string, data: {[k: string]: any}): Promise<AxiosResponse<any, any>> {
+        return await this._request({ method: 'DELETE', path, args: { data } });
     }
 
     async _post(path: string, data: {[k: string]: any}): Promise<AxiosResponse<any, any>> {
