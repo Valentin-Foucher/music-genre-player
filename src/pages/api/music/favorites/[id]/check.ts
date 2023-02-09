@@ -1,6 +1,6 @@
 import { Session } from '@/types/types';
 import { badRequest, methodNotAllowed, noReply, ok } from '@/helpers/communication';
-import { SpotifyMusicPlayer } from '@/clients/music';
+import { SpotifyMusicPlayer } from '@/clients/spotify';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 

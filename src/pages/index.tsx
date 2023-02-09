@@ -2,12 +2,12 @@ import { createRandomColor } from '@/utils/color-utils';
 import styles from './index.module.css';
 import { MAIN_MUSIC_GENRES } from '@/helpers/constants';
 import { getTimestamp } from '@/utils/time-utils';
-import axios from 'axios';
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
 import Spotify from '@/assets/images/spotify.svg';
 import Header from '@/components/Header';
+import { ApiClient } from '@/clients/api';
 
 const getNewGradientCssRule = () => {
     const deg = Math.floor(Math.random() *360);
@@ -16,7 +16,7 @@ const getNewGradientCssRule = () => {
 }
 
 
-export default function Home() {
+export default function Home({ apiClient }: { apiClient: ApiClient }) {
     const { data: session, status } = useSession();
     const [genre, setGenre] = useState<string>();
     const [tracks, setTracks] = useState();
@@ -25,10 +25,7 @@ export default function Home() {
     const [currentlyPlayingData, setCurrentlyPlayingData] = useState<{[k: string]: any} | null>();
     
     const updateCurrentSong = () => {
-        axios
-        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/currently-playing`)
-        .then(res => setCurrentlyPlayingData(res.data))
-        .catch(_ => {});
+        apiClient.updateCurrentSong(res => setCurrentlyPlayingData(res.data));
     }
     
     if (status === 'unauthenticated') {
@@ -49,12 +46,9 @@ export default function Home() {
         if (genre) {
             setCurrentlyPlayingData(null);
 
-            axios
-            .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/search-tracks`, { genre })
-            .then(res => setTracks(res.data.tracks.items.map((t: { id: string }) => t.id)));
-            
-            axios
-            .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/devices`).then(res => { 
+            apiClient.searchTrackByGenre(genre, res => setTracks(res.data.tracks.items.map((t: { id: string }) => t.id)));
+            apiClient.getDevices(res => { 
+
                 const smartphoneDevices = [];
                 let selectedDevice;
                 const devices = res.data.devices;
@@ -82,20 +76,24 @@ export default function Home() {
                     }
                 }
                 setDevice(selectedDevice);
-            })
+            });
         }
     }, [genre]);
     
     useEffect(() => {
         if (device && device.active === false) {
-            axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/set-player`, { deviceId: device.id })
-            .then(_ => setDevice({...device, active: true}));
+            apiClient.setPlayer(
+                device.id,
+                _ => setDevice({...device, active: true})
+            );
             return;
         }
         
         if (device && tracks) {
-            axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/play`, { trackIds: tracks })
-            .then(_ => setTimeout(() => updateCurrentSong(), 700));
+            apiClient.playTracks(
+                tracks,
+                _ => setTimeout(() => updateCurrentSong(), 700)
+            );
         }      
     }, [tracks, device]);
     
@@ -141,6 +139,7 @@ export default function Home() {
                 {genreCards}
             </div>
             <Footer 
+                apiClient={apiClient}
                 currentlyPlayingData={currentlyPlayingData}
                 updateCurrentSong={updateCurrentSong}
                 genre={genre}

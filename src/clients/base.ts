@@ -2,9 +2,9 @@ import axios, { AxiosResponse, Method, RawAxiosRequestHeaders } from "axios";
 
 export default class BaseClient {
     _baseUrl: string;
-    _baseHeaders: {[x: string]: string};
+    _baseHeaders?: {[x: string]: string};
 
-    constructor(baseUrl: string, baseHeaders: {[x: string]: string}) {
+    constructor(baseUrl: string, baseHeaders?: {[x: string]: string}) {
         this._baseUrl = baseUrl;
         this._baseHeaders = baseHeaders;
     }
@@ -26,15 +26,15 @@ export default class BaseClient {
         return await this._request({ method: 'GET', path, args: { params }});
     }
 
-    async _delete(path: string, data: {[k: string]: any}): Promise<AxiosResponse<any, any>> {
+    async _delete(path: string, data?: {[k: string]: any}): Promise<AxiosResponse<any, any>> {
         return await this._request({ method: 'DELETE', path, args: { data } });
     }
 
-    async _post(path: string, data: {[k: string]: any}): Promise<AxiosResponse<any, any>> {
+    async _post(path: string, data?: {[k: string]: any}): Promise<AxiosResponse<any, any>> {
         return await this._request({ method: 'POST', path, args: { data }});
     }
 
-    async _put(path: string, data: {[k: string]: any}): Promise<AxiosResponse<any, any>> {
+    async _put(path: string, data?: {[k: string]: any}): Promise<AxiosResponse<any, any>> {
         return await this._request({ method: 'PUT', path, args: { data }});
     }
 }

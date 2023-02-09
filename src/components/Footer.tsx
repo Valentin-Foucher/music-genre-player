@@ -6,10 +6,11 @@ import ButtonHeart from '@/assets/images/button-heart.svg';
 import PressedButtonHeart from '@/assets/images/pressed-button-heart.svg';
 import UnknownArtist from '@/assets/images/unknown-artist.svg';
 import axios from 'axios';
+import { ApiClient } from '@/clients/api';
 
 
 
-export default function Footer({ currentlyPlayingData, genre, updateCurrentSong }: { currentlyPlayingData: any, genre?: string, updateCurrentSong: () => void }) {
+export default function Footer({ apiClient, currentlyPlayingData, genre, updateCurrentSong }: { apiClient: ApiClient, currentlyPlayingData: any, genre?: string, updateCurrentSong: () => void }) {
     const [duration, setDuration] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [previewImageUrl, setPreviewImageUrl] = useState();
@@ -38,13 +39,9 @@ export default function Footer({ currentlyPlayingData, genre, updateCurrentSong 
     useEffect(() => {
         if (updatingFavorites) {
             if (!isFavorite) {
-                axios
-                .put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/favorites/${songData.id}`)
-                .then(_ => setUpdatingFavorites(false));
+                apiClient.addToFavorites(songData.id, _ => setUpdatingFavorites(false)); 
             } else {
-                axios
-                .delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/favorites/${songData.id}`)
-                .then(_ => setUpdatingFavorites(false));
+                apiClient.removeFromFavorites(songData.id, _ => setUpdatingFavorites(false));
             }
             setIsFavorite(!isFavorite);
         }
