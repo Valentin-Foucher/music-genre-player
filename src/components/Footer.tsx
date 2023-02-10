@@ -23,6 +23,18 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
         setDuration(0);
         updateCurrentSong();
     }
+
+    const timerCallback = (progress: number) => {
+        progress += 1000;
+        console.log(currentlyPlayingData.is_playing)
+        if (progress >= duration) {
+            resetPlayerToCurrentSong();
+        } else if (currentlyPlayingData.is_playing) {
+            setCurrentTime(progress);
+        } else {
+            setDuration(0);
+        }
+    }
     
     useEffect(() => {
         window.addEventListener('focus', resetPlayerToCurrentSong);
@@ -54,33 +66,11 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
     }, [currentlyPlayingData]);
 
     useEffect(() => {
-        if (currentlyPlayingData) {
-            let t = currentlyPlayingData.progress_ms;
-            
-            if (currentlyPlayingData.is_playing) {
-                const interval = setInterval(() => {
-                    t += 1000;
-                    if (t >= duration) {
-                        resetPlayerToCurrentSong();
-                    } else {
-                        setCurrentTime(t);
-                    }
-                }, 1000);
-                return () => clearInterval(interval);
-            }
-        }
-    }, [duration]);
-    
-    useEffect(() => {
-        if (songData) {
-            setDuration(songData.duration_ms);
-            const interval = setInterval(() => {
-                setCurrentTime(currentTime + 1000);
-            }, 1000);
-            
+        if (currentlyPlayingData && currentlyPlayingData.is_playing) {
+            const interval = setInterval(() => timerCallback(currentlyPlayingData.progress_ms), 1000);
             return () => clearInterval(interval);
         }
-    }, [currentTime]);
+    }, [duration]);
     
     return (
         <footer className={styles.footer}>
