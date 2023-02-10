@@ -17,11 +17,7 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
     
     const songData = currentlyPlayingData?.item;
-    
-    const toggleFavorites = () => {
-        setUpdatingFavorites(true);
-    }
-    
+        
     const resetPlayerToCurrentSong = () => {
         setCurrentTime(0);
         setDuration(0);
@@ -54,8 +50,13 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
             }
 
             apiClient.checkInFavorites(songData.id, res => setIsFavorite(res.data[0]));
-            
+        }
+    }, [currentlyPlayingData]);
+
+    useEffect(() => {
+        if (currentlyPlayingData) {
             let t = currentlyPlayingData.progress_ms;
+            
             if (currentlyPlayingData.is_playing) {
                 const interval = setInterval(() => {
                     t += 1000;
@@ -68,7 +69,7 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
                 return () => clearInterval(interval);
             }
         }
-    }, [currentlyPlayingData]);
+    }, [duration]);
     
     useEffect(() => {
         if (songData) {
@@ -112,7 +113,7 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
                             role='switch'
                             aria-checked={isFavorite}
                             aria-label='Save to Your Library'
-                            onClick={toggleFavorites}
+                            onClick={_ => setUpdatingFavorites(true)}
                             disabled={updatingFavorites}
                         >
                             {isFavorite 
