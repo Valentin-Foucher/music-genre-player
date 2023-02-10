@@ -16,7 +16,7 @@ class SpotifyMusicPlayer extends BaseClient {
             {
                 q: genre,
                 type: 'playlist',
-                offset: Math.floor(Math.random() * 1000)
+                offset: Math.floor(Math.random() * 950)
             }
         );
     }
@@ -27,7 +27,7 @@ class SpotifyMusicPlayer extends BaseClient {
             {
                 q: `genre:${genre}`,
                 type: 'track',
-                offset: Math.floor(Math.random() * 1000),
+                offset: Math.floor(Math.random() * 950),
                 limit: 50
             }
         );

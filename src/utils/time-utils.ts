@@ -1,6 +1,6 @@
 export const getTimesampMillis = (date?: Date): number => {
-    date = date ? date : new Date();
-    return new Date().getTime();
+    date = date || new Date();
+    return date.getTime();
 }
 
 export const getTimestamp = (date?: Date): number => {

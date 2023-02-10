@@ -16,6 +16,7 @@
 
     text-transform: capitalize;
     font-size: xx-large;
+    user-select: none;
 }
 
 .card:hover {
