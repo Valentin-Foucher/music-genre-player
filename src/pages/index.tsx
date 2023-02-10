@@ -8,6 +8,8 @@ import Footer from '@/components/Footer';
 import Spotify from '@/assets/images/spotify.svg';
 import Header from '@/components/Header';
 import { ApiClient } from '@/clients/api';
+import { Session } from '@/types/types';
+
 
 const getNewGradientCssRule = () => {
     const deg = Math.floor(Math.random() *360);
@@ -15,9 +17,8 @@ const getNewGradientCssRule = () => {
     return 'linear-gradient(' + deg + 'deg, ' + '#' + createRandomColor() + ', ' + '#' + createRandomColor() +')';
 }
 
-
 export default function Home({ apiClient }: { apiClient: ApiClient }) {
-    const { data: session, status } = useSession();
+    const { data: session, status }: { data: Session | null, status: string } = useSession();
     const [genre, setGenre] = useState<string>();
     const [tracks, setTracks] = useState();
     const [device, setDevice] = useState<{ id: string, active: boolean }>();
@@ -33,7 +34,7 @@ export default function Home({ apiClient }: { apiClient: ApiClient }) {
     }
     
     useEffect(() => {
-        if ((session as any)?.token?.expiresAt < getTimestamp() || (session as any)?.error === "RefreshAccessTokenError") {
+        if (session?.token?.expiresAt! < getTimestamp() || session?.error === "RefreshAccessTokenError") {
             signIn('spotify');
             return;
         }
@@ -97,7 +98,7 @@ export default function Home({ apiClient }: { apiClient: ApiClient }) {
         }      
     }, [tracks, device]);
     
-    if (!session) {
+    if (!(session && session.token)) {
         return (
             <>
                 <Header />

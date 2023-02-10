@@ -9,6 +9,7 @@ export interface Session {
     };
     expires: ISODateString;
     token?: JWT;
+    error?: string;
 } 
 
 export interface JWT {
