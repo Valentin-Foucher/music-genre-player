@@ -14,9 +14,8 @@ export default async function handler(
       methodNotAllowed(res);
     }
 
-    const session = await getSession({ req });
-
-    const player = new SpotifyMusicPlayer((session as Session).token?.accessToken!);
+    const session: Session | null = await getSession({ req });
+    const player = new SpotifyMusicPlayer(session?.token?.accessToken!);
 
     let result;
     try {

@@ -76,4 +76,16 @@
 
 .sound-bar {
     justify-content: center;
+    flex-direction: column;
+}
+
+.play-button {
+    height: 32px;
+    border-radius: 32px;
+    min-width: 32px;
+    margin-bottom: 8px;
+}
+
+.play-button:hover {
+    transform: scale(1.05);
 }

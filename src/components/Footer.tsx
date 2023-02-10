@@ -5,6 +5,8 @@ import Image from 'next/image';
 import ButtonHeart from '@/assets/images/button-heart.svg';
 import PressedButtonHeart from '@/assets/images/pressed-button-heart.svg';
 import UnknownArtist from '@/assets/images/unknown-artist.svg';
+import PlayIcon from '@/assets/images/play-icon.svg';
+import PauseIcon from '@/assets/images/pause-icon.svg';
 import { ApiClient } from '@/clients/api';
 
 
@@ -26,7 +28,6 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
 
     const timerCallback = (progress: number) => {
         progress += 1000;
-        console.log(currentlyPlayingData.is_playing)
         if (progress >= duration) {
             resetPlayerToCurrentSong();
         } else if (currentlyPlayingData.is_playing) {
@@ -114,6 +115,21 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
                     </div>
                     
                     <div className={styles['sound-bar']}>
+                        <button 
+                            className={styles['play-button']}
+                            onClick={() => {
+                                if (currentlyPlayingData.is_playing) {
+                                    apiClient.pausePlaying(updateCurrentSong);
+                                } else {
+                                    apiClient.startPlaying(updateCurrentSong);
+                                }
+                            }}
+                        >
+                            {currentlyPlayingData.is_playing 
+                            ? <PauseIcon /> 
+                            : <PlayIcon />}
+
+                        </button>
                         {duration !== 0 && currentTime !== 0 && 
                             <>
                                 {formatMillis(currentTime)} - {formatMillis(duration)}

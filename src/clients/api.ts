@@ -53,6 +53,17 @@ class ApiClient extends BaseClient {
         .then(callback);
     }
 
+    startPlaying(callback: (value: any) => void) {
+        this
+        ._post('/music/player/play-tracks')
+        .then(callback);
+    }
+    pausePlaying(callback: (value: any) => void) {
+        this
+        ._post('/music/player/pause')
+        .then(callback);
+    }
+
     updateCurrentSong(callback: (value: any) => void) {
         this
         ._get('/music/player/currently-playing')
