@@ -81,15 +81,21 @@ class SpotifyMusicPlayer extends BaseClient {
     }
 
     // play
-    async playTracks(trackIds: string[]) {
+    async startPlaying(trackIds?: string[]) {
+        const data = trackIds 
+        ? { uris: trackIds.map(id => `spotify:track:${id}`) } 
+        : {};
+
         return await this._put(
             '/me/player/play',
-            {
-                uris: trackIds.map(id => `spotify:track:${id}`)
-            }
+            data
         );
     }
 
+    async pausePlaying() {
+        return await this._put('/me/player/pause');
+    } 
+    
     async getCurrentlyPlayingTrack() {
         return await this._get('/me/player/currently-playing');
     }

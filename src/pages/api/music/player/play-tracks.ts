@@ -19,7 +19,7 @@ export default async function handler(
 
     let result;
     try {
-      result = await player.playTracks(req.body.trackIds);
+      result = await player.startPlaying(req.body.trackIds);
     } catch (error) {
       console.log(error)
       return badRequest(res);

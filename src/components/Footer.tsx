@@ -5,7 +5,6 @@ import Image from 'next/image';
 import ButtonHeart from '@/assets/images/button-heart.svg';
 import PressedButtonHeart from '@/assets/images/pressed-button-heart.svg';
 import UnknownArtist from '@/assets/images/unknown-artist.svg';
-import axios from 'axios';
 import { ApiClient } from '@/clients/api';
 
 
@@ -13,9 +12,9 @@ import { ApiClient } from '@/clients/api';
 export default function Footer({ apiClient, currentlyPlayingData, genre, updateCurrentSong }: { apiClient: ApiClient, currentlyPlayingData: any, genre?: string, updateCurrentSong: () => void }) {
     const [duration, setDuration] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState<number>(0);
-    const [previewImageUrl, setPreviewImageUrl] = useState();
+    const [previewImageUrl, setPreviewImageUrl] = useState<string>();
     const [updatingFavorites, setUpdatingFavorites] = useState<boolean>(false);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
     
     const songData = currentlyPlayingData?.item;
     
@@ -54,12 +53,9 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
                 setPreviewImageUrl(songData.album.images.find((i: { height: number, url: string }) => i.height === 64)?.url);
             }
 
-            axios
-            .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/music/favorites/${songData.id}/check`)
-            .then(res => setIsFavorite(res.data[0]));
+            apiClient.checkInFavorites(songData.id, res => setIsFavorite(res.data[0]));
             
             let t = currentlyPlayingData.progress_ms;
-            
             if (currentlyPlayingData.is_playing) {
                 const interval = setInterval(() => {
                     t += 1000;

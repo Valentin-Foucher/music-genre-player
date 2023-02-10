@@ -25,7 +25,7 @@ class ApiClient extends BaseClient {
 
     setPlayer(deviceId: string, callback: (value: any) => void) {
         this
-        ._post('/music/set-player', { deviceId })
+        ._post('/music/player/set', { deviceId })
         .then(callback);
     }
 
@@ -42,18 +42,20 @@ class ApiClient extends BaseClient {
     }
 
     checkInFavorites(songDataId: string, callback: (value: any) => void) {
-
+        this
+        ._get(`/music/favorites/${songDataId}/check`)
+        .then(callback);
     }
 
     playTracks(trackIds: string[], callback: (value: any) => void) {
         this
-        ._post('/music/play', { trackIds })
+        ._post('/music/player/play-tracks', { trackIds })
         .then(callback);
     }
 
     updateCurrentSong(callback: (value: any) => void) {
         this
-        ._get('/music/currently-playing')
+        ._get('/music/player/currently-playing')
         .then(callback)
         .catch(_ => {});
     }

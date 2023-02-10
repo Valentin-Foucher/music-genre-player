@@ -20,7 +20,7 @@ const getNewGradientCssRule = () => {
 export default function Home({ apiClient }: { apiClient: ApiClient }) {
     const { data: session, status }: { data: Session | null, status: string } = useSession();
     const [genre, setGenre] = useState<string>();
-    const [tracks, setTracks] = useState();
+    const [tracks, setTracks] = useState<string[]>();
     const [device, setDevice] = useState<{ id: string, active: boolean }>();
     const [backgrounds, setBackgrounds] = useState<string[]>();
     const [currentlyPlayingData, setCurrentlyPlayingData] = useState<{[k: string]: any} | null>();
