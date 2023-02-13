@@ -1,0 +1,30 @@
+.progress-bar {
+    width: 90%;
+    height: 3px;
+    margin-top: 5px;
+
+    display: flex;
+    align-items: center;
+    --dark-grey: rgba(255, 255, 255, 0.4);
+}
+
+.listened {
+    height: inherit;
+    width: 0;
+
+    background-color: #fff;
+}
+
+.not-listened {
+    height: inherit;
+    width: 0;
+
+    background-color: var(--dark-grey);
+}
+
+.duration {
+    margin: 0 5px 0 5px;
+    font-size: 10px;
+
+    color: var(--dark-grey);
+}

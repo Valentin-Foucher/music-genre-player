@@ -10,6 +10,7 @@ import PauseIcon from '@/assets/images/pause-icon.svg';
 import PreviousIcon from '@/assets/images/previous-icon.svg';
 import NextIcon from '@/assets/images/next-icon.svg';
 import { ApiClient } from '@/clients/api';
+import ProgressBar from './ProgressBar';
 
 
 
@@ -50,7 +51,7 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
     useEffect(() => {
         if (songData) {
             setDuration(songData.duration_ms);
-            setCurrentTime(currentlyPlayingData.progress_ms - 1000);
+            setCurrentTime(currentlyPlayingData.progress_ms);
             if (songData?.album?.images.length > 0) {
                 setPreviewImageUrl(songData.album.images.find((i: { height: number, url: string }) => i.height === 64)?.url);
             }
@@ -145,11 +146,10 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
                                 <NextIcon />
                             </button>
                         </div>
-                        {duration !== 0 && currentTime !== 0 && 
-                            <>
-                                {formatMillis(currentTime)} - {formatMillis(duration)}
-                            </>
-                        }   
+                        <ProgressBar
+                            duration={duration}
+                            currentTime={currentTime}
+                        />
                     </div>   
                 <div />  
             </>       
