@@ -28,27 +28,3 @@
     margin-top: 10%;
     margin-left: 10%;
 }
-
-.sign-in-button {
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-
-    margin-top: 20px;
-    background-color: transparent;
-}
-
-.sign-in-button:hover {
-    transform: scale(1.1);
-}
-
-.sign-in-text {
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-
-    background-color: transparent;
-}
-

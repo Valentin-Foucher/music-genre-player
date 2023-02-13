@@ -1,4 +1,4 @@
-export const createRandomColor = () => {
+export const createRandomColor = (): string => {
     let hexCode = '';
     var hexValues = '0123456789abcdef';
     
@@ -6,4 +6,10 @@ export const createRandomColor = () => {
       hexCode += hexValues.charAt(Math.floor(Math.random() * hexValues.length));
     }
     return hexCode;
+}
+
+export const getNewGradientCssRule = (): string => {
+  const deg = Math.floor(Math.random() *360);
+  
+  return `linear-gradient(${deg}deg, #${createRandomColor()}, #${createRandomColor()})`;
 }

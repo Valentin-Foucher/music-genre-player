@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from './Footer.module.css';
-import { formatMillis } from '@/utils/time-utils';
+import styles from './SoundBar.module.css';
 import Image from 'next/image';
 import ButtonHeart from '@/assets/images/button-heart.svg';
 import PressedButtonHeart from '@/assets/images/pressed-button-heart.svg';
@@ -14,7 +13,10 @@ import ProgressBar from './ProgressBar';
 
 
 
-export default function Footer({ apiClient, currentlyPlayingData, genre, updateCurrentSong }: { apiClient: ApiClient, currentlyPlayingData: any, genre?: string, updateCurrentSong: () => void }) {
+export default function SoundBar({ genre }: { genre?: string }) {
+    const [tracks, setTracks] = useState<string[]>();
+    const [device, setDevice] = useState<{ id: string, active: boolean }>();
+    const [currentlyPlayingData, setCurrentlyPlayingData] = useState<{[k: string]: any} | null>();
     const [duration, setDuration] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [previewImageUrl, setPreviewImageUrl] = useState<string>();
@@ -22,7 +24,12 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
     
     const songData = currentlyPlayingData?.item;
-        
+    const apiClient = new ApiClient();
+    
+    const updateCurrentSong = () => {
+        apiClient.updateCurrentSong(res => setCurrentlyPlayingData(res.data));
+    }
+
     const resetPlayerToCurrentSong = () => {
         setCurrentTime(0);
         setDuration(0);
@@ -39,6 +46,65 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
             window.removeEventListener('focus', resetPlayerToCurrentSong);
         };
     });
+
+    useEffect(() => {
+        updateCurrentSong();
+    }, []);
+
+    useEffect(() => {
+        if (genre) {
+            setCurrentlyPlayingData(null);
+
+            apiClient.searchTrackByGenre(genre, res => setTracks(res.data.tracks.items.map((t: { id: string }) => t.id)));
+            apiClient.getDevices(res => { 
+
+                const smartphoneDevices = [];
+                let selectedDevice;
+                const devices = res.data.devices;
+                
+                if (!devices) {
+                    return;
+                }
+                
+                for (const d of devices) {
+                    if (d.is_active) {
+                        selectedDevice = { id: d.id, active: true };
+                        break;
+                    }
+                    if (d.type === 'smartphone') {
+                        smartphoneDevices.push({ id: d.id, active: false });
+                    }
+                }
+                
+                if (!selectedDevice) {
+                    if (smartphoneDevices.length > 0) {
+                        selectedDevice = smartphoneDevices[0];
+                    } else {
+                        const { id, is_active: active } = devices[0];
+                        selectedDevice = { id, active };
+                    }
+                }
+                setDevice(selectedDevice);
+            });
+        }
+    }, [genre]);
+
+    useEffect(() => {
+        if (device && device.active === false) {
+            apiClient.setPlayer(
+                device.id,
+                _ => setDevice({...device, active: true})
+            );
+            return;
+        }
+        
+        if (device && tracks) {
+            apiClient.playTracks(
+                tracks,
+                _ => setTimeout(() => updateCurrentSong(), 700)
+            );
+        }      
+    }, [tracks, device]);
 
     useEffect(() => {
         if (updatingFavorites) {
