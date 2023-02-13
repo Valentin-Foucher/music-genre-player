@@ -1,5 +1,4 @@
 import { signIn } from 'next-auth/react';
-import { MusicGenre } from '@//types/types';
 import BaseClient from "@/clients/base";
 
 class ApiClient extends BaseClient {
@@ -7,7 +6,7 @@ class ApiClient extends BaseClient {
         super(process.env.NEXT_PUBLIC_BACKEND_URL!);
     }
     
-    searchTrackByGenre(genre: MusicGenre, callback: (value: any) => void) {
+    searchTrackByGenre(genre: string, callback: (value: any) => void) {
         this
         ._post('/music/search-tracks', { genre })
         .then(callback);

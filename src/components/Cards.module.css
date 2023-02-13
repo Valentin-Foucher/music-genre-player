@@ -1,0 +1,72 @@
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 550px) { 
+    .cards-container {
+        justify-content: center;
+    }
+}
+
+.card {
+    width: 14vw;
+    height: 19vh;
+    min-width: 150px;
+    margin: 1rem;
+    border-radius: 5%;
+
+    display: inline;
+    user-select: none;
+}
+
+.card:hover {
+    cursor: pointer;
+    transform: scale(1.02); 
+}
+
+.card-text {
+    bottom: 90%;
+    left: 10%;
+    width: 86%;
+    
+    user-select: none;
+    position: relative;
+    text-transform: capitalize;
+    font-size: 26px;
+    pointer-events: none;
+}
+
+.half-card {
+    height: 100%;
+    color: #fff;
+}
+
+.left-card {
+    float: left;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 50%;
+}
+
+.half-card > svg {
+    position: relative;
+    display: block;
+    top: 65%;
+    left: 35%;
+    height: auto;
+    
+    fill: #fff;
+    transition: fill 0.3s;
+}
+
+.half-card > svg:hover {
+    fill: #1ed760;
+    transition: fill 0.3s;
+}
+
+.right-card {
+    float: right;
+    width: 50%;
+}

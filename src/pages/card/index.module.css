@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-button {
+    width: 65px;
+    height: 35px;
+    border-radius: 500px;
+    margin-top: 30px;
+
+    background-color: rgb(26, 26, 26);
+    color: #fff;
+    border: #fff solid;
+}
+
+.back-button:hover {
+    transform: scale(1.02);
+}
+
+.container-bottom {
+    min-height: 15vh;
+}

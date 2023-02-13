@@ -12,7 +12,6 @@ import { ApiClient } from '@/clients/api';
 import ProgressBar from './ProgressBar';
 
 
-
 export default function SoundBar({ genre }: { genre?: string }) {
     const [tracks, setTracks] = useState<string[]>();
     const [device, setDevice] = useState<{ id: string, active: boolean }>();
