@@ -28,17 +28,7 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
         updateCurrentSong();
     }
 
-    const timerCallback = (progress: number) => {
-        progress += 1000;
-        if (progress >= duration) {
-            resetPlayerToCurrentSong();
-        } else if (currentlyPlayingData.is_playing) {
-            setCurrentTime(progress);
-        } else {
-            setDuration(0);
-        }
-    }
-    
+
     useEffect(() => {
         window.addEventListener('focus', resetPlayerToCurrentSong);
         return () => {
@@ -60,6 +50,7 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
     useEffect(() => {
         if (songData) {
             setDuration(songData.duration_ms);
+            setCurrentTime(currentlyPlayingData.progress_ms - 1000);
             if (songData?.album?.images.length > 0) {
                 setPreviewImageUrl(songData.album.images.find((i: { height: number, url: string }) => i.height === 64)?.url);
             }
@@ -70,11 +61,19 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
 
     useEffect(() => {
         if (currentlyPlayingData && currentlyPlayingData.is_playing) {
-            const interval = setInterval(() => timerCallback(currentlyPlayingData.progress_ms), 1000);
+            const interval = setInterval(() => setCurrentTime((currentTime) => currentTime + 1000), 1000);
             return () => clearInterval(interval);
         }
     }, [duration]);
-    
+
+    useEffect(() => {
+        if (currentTime >= duration) {
+            resetPlayerToCurrentSong();
+        } else if (!currentlyPlayingData.is_playing) {
+            setDuration(0);
+        }
+    }, [currentTime]);
+
     return (
         <footer className={styles.footer}>
             {songData &&
