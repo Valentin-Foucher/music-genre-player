@@ -79,6 +79,13 @@
     flex-direction: column;
 }
 
+.sound-bar-buttons {
+    width: 7vw;
+    padding: 0 30%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .play-button {
     height: 32px;
     border-radius: 32px;
@@ -88,4 +95,15 @@
 
 .play-button:hover {
     transform: scale(1.05);
+}
+
+.previous-next-button {
+    background-color: transparent;    
+    color: rgba(255, 255, 255, 0.7);
+    fill: rgba(255, 255, 255, 0.7);
+}
+
+.previous-next-button:hover {
+    fill: #fff;
+    color: #fff;
 }

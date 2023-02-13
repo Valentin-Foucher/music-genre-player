@@ -7,6 +7,8 @@ import PressedButtonHeart from '@/assets/images/pressed-button-heart.svg';
 import UnknownArtist from '@/assets/images/unknown-artist.svg';
 import PlayIcon from '@/assets/images/play-icon.svg';
 import PauseIcon from '@/assets/images/pause-icon.svg';
+import PreviousIcon from '@/assets/images/previous-icon.svg';
+import NextIcon from '@/assets/images/next-icon.svg';
 import { ApiClient } from '@/clients/api';
 
 
@@ -115,21 +117,35 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
                     </div>
                     
                     <div className={styles['sound-bar']}>
-                        <button 
-                            className={styles['play-button']}
-                            onClick={() => {
-                                if (currentlyPlayingData.is_playing) {
-                                    apiClient.pausePlaying(updateCurrentSong);
-                                } else {
-                                    apiClient.startPlaying(updateCurrentSong);
-                                }
-                            }}
-                        >
-                            {currentlyPlayingData.is_playing 
-                            ? <PauseIcon /> 
-                            : <PlayIcon />}
+                        <div className={styles['sound-bar-buttons']}>
+                            <button
+                                className={styles['previous-next-button']}
+                                onClick={() => apiClient.previousTrack(updateCurrentSong)}
+                            >
+                                <PreviousIcon />
+                            </button>
+                            <button 
+                                className={styles['play-button']}
+                                onClick={() => {
+                                    if (currentlyPlayingData.is_playing) {
+                                        apiClient.pausePlaying(updateCurrentSong);
+                                    } else {
+                                        apiClient.startPlaying(updateCurrentSong);
+                                    }
+                                }}
+                            >
+                                {currentlyPlayingData.is_playing 
+                                ? <PauseIcon /> 
+                                : <PlayIcon />}
 
-                        </button>
+                            </button>
+                            <button
+                                className={styles['previous-next-button']}
+                                onClick={() => apiClient.nextTrack(updateCurrentSong)}
+                            >
+                                <NextIcon />
+                            </button>
+                        </div>
                         {duration !== 0 && currentTime !== 0 && 
                             <>
                                 {formatMillis(currentTime)} - {formatMillis(duration)}

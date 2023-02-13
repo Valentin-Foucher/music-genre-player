@@ -92,12 +92,20 @@ class SpotifyMusicPlayer extends BaseClient {
         );
     }
 
+    async getCurrentlyPlayingTrack() {
+        return await this._get('/me/player/currently-playing');
+    }
+
     async pausePlaying() {
         return await this._put('/me/player/pause');
     } 
-    
-    async getCurrentlyPlayingTrack() {
-        return await this._get('/me/player/currently-playing');
+
+    async previousTrack() {
+        return await this._post('/me/player/previous');
+    }
+
+    async nextTrack() {
+        return await this._post('/me/player/next');
     }
 }
 

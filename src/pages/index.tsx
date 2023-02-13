@@ -33,8 +33,10 @@ export default function Home({ apiClient }: { apiClient: ApiClient }) {
         signIn('spotify');
     }
     
+    console.log(session?.token?.expiresAt!)
+    console.log(getTimestamp())
     useEffect(() => {
-        if (session?.token?.expiresAt! < getTimestamp() || session?.error === "RefreshAccessTokenError") {
+        if (session?.token?.expiresAt! < getTimestamp() || session?.error === 'RefreshAccessTokenError') {
             signIn('spotify');
             return;
         }
