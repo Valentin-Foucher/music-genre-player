@@ -29,6 +29,9 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
         updateCurrentSong();
     }
 
+    const isPlaying = () => {
+        return currentlyPlayingData && currentlyPlayingData.is_playing;
+    }
 
     useEffect(() => {
         window.addEventListener('focus', resetPlayerToCurrentSong);
@@ -61,7 +64,7 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
     }, [currentlyPlayingData]);
 
     useEffect(() => {
-        if (currentlyPlayingData && currentlyPlayingData.is_playing) {
+        if (isPlaying()) {
             const interval = setInterval(() => setCurrentTime((currentTime) => currentTime + 1000), 1000);
             return () => clearInterval(interval);
         }
@@ -70,7 +73,7 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
     useEffect(() => {
         if (currentTime >= duration) {
             resetPlayerToCurrentSong();
-        } else if (!currentlyPlayingData.is_playing) {
+        } else if (!isPlaying()) {
             setDuration(0);
         }
     }, [currentTime]);
@@ -127,16 +130,14 @@ export default function Footer({ apiClient, currentlyPlayingData, genre, updateC
                             <button 
                                 className={styles['play-button']}
                                 onClick={() => {
-                                    if (currentlyPlayingData.is_playing) {
+                                    if (isPlaying()) {
                                         apiClient.pausePlaying(updateCurrentSong);
                                     } else {
                                         apiClient.startPlaying(updateCurrentSong);
                                     }
                                 }}
                             >
-                                {currentlyPlayingData.is_playing 
-                                ? <PauseIcon /> 
-                                : <PlayIcon />}
+                                {isPlaying() ? <PauseIcon /> : <PlayIcon />}
 
                             </button>
                             <button
