@@ -1,6 +1,6 @@
-import { MusicGenre } from '@/types/types';
+import { MusicGenre } from '@/types';
 import { useRouter } from 'next/router';
-import { MUSIC_GENRES } from '@/helpers/constants';
+import { MUSIC_GENRES } from '@/constants';
 import Cards from '@/components/Cards';
 import styles from './index.module.css';
 

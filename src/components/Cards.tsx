@@ -2,7 +2,7 @@ import styles from './Cards.module.css';
 import SoundBar from '@/components/SoundBar';
 import Header from '@/components/Header';
 import { shouldSignIn } from '@/utils/oauth-utils';
-import { Session } from '@/types/types';
+import { Session } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { getNewGradientCssRule } from '@/utils/color-utils';

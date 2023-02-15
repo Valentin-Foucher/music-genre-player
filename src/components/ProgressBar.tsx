@@ -1,4 +1,4 @@
-import { formatMillis } from "@/utils/time-utils";
+import { formatMillis } from '@/utils/time-utils';
 import styles from './ProgressBar.module.css';
 
 export default function ProgressBar({ duration, currentTime }: { duration: number, currentTime: number }) {

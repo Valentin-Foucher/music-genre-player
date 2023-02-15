@@ -1,4 +1,4 @@
-import { Session, JWT } from '@/types/types';
+import { Session, JWT } from '@/types';
 import NextAuth, { Account } from 'next-auth'
 import SpotifyProvider from 'next-auth/providers/spotify'
 

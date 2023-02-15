@@ -1,5 +1,5 @@
-import { MusicGenre } from '@//types/types';
-import BaseClient from "@/clients/base";
+import { MusicGenre } from '@/types';
+import BaseClient from '@/clients/base';
 
 class SpotifyMusicPlayer extends BaseClient {
     constructor(authorization: string) {

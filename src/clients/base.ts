@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, Method, RawAxiosRequestHeaders } from "axios";
+import axios, { AxiosResponse, Method, RawAxiosRequestHeaders } from 'axios';
 
 export default class BaseClient {
     _baseUrl: string;

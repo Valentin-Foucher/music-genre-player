@@ -1,5 +1,5 @@
-import { Session } from '@/types/types';
-import { badRequest, noReply, methodNotAllowed } from '@/helpers/communication';
+import { Session } from '@/types';
+import { badRequest, noReply, methodNotAllowed } from '@/utils/communication-utils';
 import { SpotifyMusicPlayer } from '@/clients/spotify';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';

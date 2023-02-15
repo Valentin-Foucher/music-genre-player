@@ -1,8 +1,8 @@
 export const genreSchema = {
-    type: "object",
+    type: 'object',
     properties: {
-        genre: {type: "string"},
+        genre: {type: 'string'},
     },
-    required: ["genre"],
+    required: ['genre'],
     additionalProperties: false
-}
+};

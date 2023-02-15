@@ -1,4 +1,4 @@
-import { MAIN_MUSIC_GENRES, MUSIC_GENRES } from '@/helpers/constants';
+import { MUSIC_GENRES } from '@/constants';
 import { ISODateString } from "next-auth";
 
 export interface Session {
@@ -29,11 +29,4 @@ export interface Genre {
     subGenres: string[];
 }
 
-type ElementType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<infer ElementType>
-  ? ElementType
-  : never
-
-
 export type MusicGenre = keyof typeof MUSIC_GENRES;
-
-export type PlayableCategory = 'track' | 'album' | 'playlist';

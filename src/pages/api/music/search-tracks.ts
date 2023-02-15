@@ -1,7 +1,7 @@
 import { genreSchema } from '@/schemas/requests';
 import Ajv from 'ajv';
-import { Session } from '@/types/types';
-import { badRequest, ok, methodNotAllowed } from '@/helpers/communication';
+import { Session } from '@/types';
+import { badRequest, ok, methodNotAllowed } from '@/utils/communication-utils';
 import { SpotifyMusicPlayer } from '@/clients/spotify';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';

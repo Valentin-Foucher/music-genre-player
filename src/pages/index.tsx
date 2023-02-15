@@ -1,7 +1,7 @@
-import { MAIN_MUSIC_GENRES } from '@/helpers/constants';
+import { MAIN_MUSIC_GENRES } from '@/constants';
 import { signIn, useSession } from 'next-auth/react';
 import Header from '@/components/Header';
-import { Session } from '@/types/types';
+import { Session } from '@/types';
 import Login from '@/components/Login';
 import Cards from '@/components/Cards';
 import styles from './index.module.css';

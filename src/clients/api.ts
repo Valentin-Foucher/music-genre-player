@@ -1,5 +1,5 @@
 import { signIn } from 'next-auth/react';
-import BaseClient from "@/clients/base";
+import BaseClient from '@/clients/base';
 
 class ApiClient extends BaseClient {
     constructor() {
