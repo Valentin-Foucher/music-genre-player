@@ -4,7 +4,7 @@ import Image from 'next/image';
 import ButtonHeart from '@/assets/images/button-heart.svg';
 import PressedButtonHeart from '@/assets/images/pressed-button-heart.svg';
 import UnknownArtist from '@/assets/images/unknown-artist.svg';
-import PlayIcon from '@/assets/images/play-icon.svg';
+import PlayButton from '@/assets/images/play-button.svg';
 import PauseIcon from '@/assets/images/pause-icon.svg';
 import PreviousIcon from '@/assets/images/previous-icon.svg';
 import NextIcon from '@/assets/images/next-icon.svg';
@@ -202,7 +202,7 @@ export default function SoundBar({ genre }: { genre?: string }) {
                                     }
                                 }}
                             >
-                                {isPlaying() ? <PauseIcon /> : <PlayIcon />}
+                                {isPlaying() ? <PauseIcon /> : <PlayButton />}
 
                             </button>
                             <button
