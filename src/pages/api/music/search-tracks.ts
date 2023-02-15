@@ -1,4 +1,4 @@
-import { genreSchema } from '@/schemas/requests';
+import { genreSchema } from '@/requests';
 import Ajv from 'ajv';
 import { Session } from '@/types';
 import { badRequest, ok, methodNotAllowed } from '@/utils/communication-utils';

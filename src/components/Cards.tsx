@@ -36,28 +36,31 @@ export default function Cards({ genres, main }: { genres: string[], main: boolea
                 style={cardStyle}
             >
                 <div 
-                    className={`${styles['left-card']} ${styles['half-card']}`}
+                    className={`${styles['left-card']} ${styles['half-card']} ${styles['clickable-card']}`}
                     onClick={() => setGenre(g)}
                 >
                     <PlayIcon style={{ width: '44px' }} />
+                    <div className={styles['overlay']} style={{ bottom: '44px' }}/>
                 </div>
                 <Link
-                    className={`${styles['right-card']} ${styles['half-card']}`}
+                    className={`${styles['right-card']} ${styles['half-card']} ${styles['clickable-card']}`}
                     href={{
                         pathname: '/card',
                         query: { genre: g }
                     }}
                 >
                     <Categories style={{ width: '32px', }} />
+                    <div className={styles['overlay']} style={{ bottom: '32px' }}/>
                 </Link>
                 <div className={styles['card-text']}>
                     {g}
                 </div>
+
             </div>)
         : (
         <div 
             key={i}
-            className={styles['card']}
+            className={`${styles['card']} ${styles['clickable-card']}`}
             style={cardStyle}
             onClick={() => setGenre(g)}
         >
@@ -65,6 +68,8 @@ export default function Cards({ genres, main }: { genres: string[], main: boolea
                 <PlayIcon style={{ left: '77%', top: '55%', width: '64px' }} />
             </div>
             <div className={`${styles['right-card']} ${styles['half-card']}`} />
+
+            <div className={styles['overlay']} />
             <div className={styles['card-text']}>
                 {g}
             </div>
