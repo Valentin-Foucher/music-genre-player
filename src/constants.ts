@@ -196,7 +196,6 @@ export const MUSIC_GENRES = {
         'hard trance',
         'progressive trance',
         'psydub',
-        'psytrance',
         'tech trance',
         'zenonesque'
     ]
