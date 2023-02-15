@@ -1,160 +1,205 @@
 export const MUSIC_GENRES = {
-    'rock': [
-        'hard rock',
-        'new wave',
-        'classic rock',
-        'grunge',
-        'glam rock',
-        'garage rock',
-        'psychedelic rock',
-        'alternative rock',
-        'punk rock',
-        'rockabilly',
-        'experimental rock',
-        'progressive rock',
-        'southern rock',
-        'soft rock',
-        'surf music',
-        'space rock',
-        'stoner rock',
-        'christian rock'
-    ],
-    'jazz': [
-        'bepop',
-        'hard bop',
-        'soul jazz',
-        'cool jazz',
-        'stride',
-        'jazz fusion',
-        'avant-garde jazz',
-        'jazz funk',
-        'swing',
-        'free jazz',
-        'ska jazz',
-        'acid jazz',
-        'afrobeat',
-        'dixieland',
-        'jazz rap'
-    ],
     'blues': [
-        'traditional blues',
-        'modern blues',
         'blues rock',
-        'delta blues',
         'chicago blues',
-        'memphis blues',
-        'texas blues',
         'country blues',
+        'delta blues',
+        'gospel blues',
         'japanese blues',
-        'gospel blues'
+        'memphis blues',
+        'modern blues',
+        'texas blues',
+        'traditional blues'
     ],
     'classical': [
-        'opera',
         'baroque',
         'chamber orchestra',
-        'renaissance',
-        'medieval',
         'early modern classical',
-        'neoclassicism',
         'early romantic era',
-        'late romantic era'
+        'late romantic era',
+        'medieval',
+        'neoclassicism',
+        'opera',
+        'renaissance'
     ],
     'country': [
-        'alertnative country',
+        'alternative country',
+        'country blues',
+        'country rap',
         'honky tonk',
         'outlaw country',
         'truck-driving country',
         'western swing'
     ],
-    'soul': [
-        'motown',
-        'neo soul',
-        'retro soul',
-        'quiet storm'
+    'disco': [
+        'boogie',
+        'disco house',
+        'disco polo',
+        'future funk',
+        'new italo disco',
+        'nu disco',
+        'post-disco'
+    ],
+    'edm': [
+        'chiptune',
+        'drum and bass',
+        'dubstep',
+        'electro',
+        'hardstyle',
+        'synthwave',
+        'vaporwave'
+    ],
+    'house': [
+        'acid house',
+        'ambient house',
+        'deep house',
+        'electro house',
+        'future house',
+        'microhouse',
+        'progressive house'
+    ],
+    'jazz': [
+        'acid jazz',
+        'afrobeat',
+        'avant-garde jazz',
+        'bepop',
+        'cool jazz',
+        'dixieland',
+        'free jazz',
+        'hard bop',
+        'jazz funk',
+        'jazz fusion',
+        'jazz rap',
+        'ska jazz',
+        'soul jazz',
+        'stride',
+        'swing'
     ],
     'metal': [
-        'heavy metal',
-        'funk metal',
-        'nu metal',
-        'rap metal',
         'avant-garde metal',
         'black metal',
         'christian metal',
         'crust punk',
         'death metal',
+        'deathcore',
+        'djent',
         'doom metal',
+        'electronicore',
         'folk metal',
+        'funk metal',
         'glam metal',
         'gothic metal',
         'grindcore',
+        'groove metal',
+        'heavy metal',
         'industrial metal',
-        'deathcore',
-        'progressive metalcore',
-        'nu-metalcore',
-        'electronicore',
         'mathcore',
         'melodic metalcore',
+        'nu metal',
+        'nu-metalcore',
         'post-metal',
-        'progressive metal',    
         'power metal',
-        'djent',
-        'thrash metal',
-        'groove metal'
-    ],
-    'rap': [
-        'gangster rap',
-        'alternative hip hop',
-        'christian hip hop',
-        'political hip hop',
-        'industrial hip hop',
-        'experimental hip hop',
-        'harcore hip hop',
-        'horrorcore',
-        'underground rap',
-        'trap',
-        'chopped and screwed',
-        'dirty south rap',
-        'nerdcore',
-        'drill',
-        'bounce',
-        'rap conscient'
-    ],    
-    'reggae': [
-        
-    ],
-    'dub': [
-        
+        'progressive metal',
+        'progressive metalcore',
+        'rap metal',
+        'thrash metal'
     ],
     'pop': [
-        'pop rock',
+        'art pop',
+        'bubblegum pop',
+        'dance pop',
+        'electropop',
         'indie pop',
-        'k-pop',
-        'variete francaise'
+        'jazz pop',
+        'operatic pop',
+        'pop house',
+        'pop rock',
+        'pop soul',
+        'schlager',
+        'sunshine pop',
+        'synthpop',
+        'teen pop',
+        'variete francaise',
+        'wonky'
     ],
-    'disco': [
-        
+    'rap': [
+        'alternative hip hop',
+        'bounce',
+        'chopped and screwed',
+        'christian hip hop',
+        'dirty south rap',
+        'drill',
+        'experimental hip hop',
+        'gangster rap',
+        'harcore hip hop',
+        'horrorcore',
+        'industrial hip hop',
+        'nerdcore',
+        'political hip hop',
+        'rap conscient',
+        'trap',
+        'underground rap'
     ],
-    'electro': [
-        
+    'reggae': [
+        'dub',
+        'early reggae',
+        'lovers rock',
+        'reggae fusion',
+        'reggaeton',
+        'rocksteady',
+        'roots reggae',
+        'ska'
+    ],
+    'rock': [
+        'alternative rock',
+        'christian rock',
+        'classic rock',
+        'experimental rock',
+        'garage rock',
+        'glam rock',
+        'grunge',
+        'hard rock',
+        'new wave',
+        'progressive rock',
+        'psychedelic rock',
+        'punk rock',
+        'rockabilly',
+        'soft rock',
+        'southern rock',
+        'space rock',
+        'stoner rock',
+        'surf music'
+    ],
+    'soul': [
+        'motown',
+        'neo soul',
+        'nu jazz',
+        'psychedelic soul',
+        'quiet storm',
+        'retro soul',
+        'swamp rock'
     ],
     'techno': [
-        
-    ],
-    'house': [
-
-    ],
-    'hardcore techno': [
-        
+        'acid techno',
+        'ambient techno',
+        'detroit techno',
+        'hardcore techno',
+        'industrial techno',
+        'minimal techno',
+        'tech house'
     ],
     'trance': [
-        
-    ],
-    'african': [
-        
-    ],
-    'latin': [
-        
-    ],
+        'dark psytrance',
+        'forest psy',
+        'full on',
+        'goa trance',
+        'hard trance',
+        'progressive trance',
+        'psydub',
+        'psytrance',
+        'tech trance',
+        'zenonesque'
+    ]
 };
 
-export const MAIN_MUSIC_GENRES = Object.keys(MUSIC_GENRES); 
+export const MAIN_MUSIC_GENRES = Object.keys(MUSIC_GENRES);
