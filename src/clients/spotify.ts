@@ -25,7 +25,7 @@ class SpotifyMusicPlayer extends BaseClient {
         return await this._get(
             '/search',
             {
-                q: `genre:${genre}`,
+                q: `genre:"${genre}"`,
                 type: 'track',
                 offset: Math.floor(Math.random() * 950),
                 limit: 50
