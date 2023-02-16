@@ -16,6 +16,15 @@
     background-color: rgb(30, 30, 30);
 }
 
+
+@media (max-width: 250px) { 
+    .footer {
+        height: 17vh;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+}
+
 .footer > div {
     display: flex;
     align-items: center;
@@ -27,6 +36,20 @@
 
 .footer > div:nth-child(2) {
     width: 40%;
+}
+
+@media (max-width: 550px) { 
+    .footer > div:nth-child(1) {
+        width: 50%;
+    }
+
+    .footer > div:nth-child(2) {
+        width: 50%;
+    }
+
+    .footer > div:nth-child(3) {
+        width: 0;
+    }
 }
 
 .current-song {
@@ -81,10 +104,16 @@
 }
 
 .sound-bar-buttons {
-    width: 7vw;
-    padding: 0 30%;
+    width: 12vw;
+    max-width: 120px;
     display: flex;
     justify-content: space-between;
+}
+
+@media (max-width: 550px) { 
+    .sound-bar-buttons {
+        width: auto;
+    }
 }
 
 .play-button {
